@@ -6,6 +6,7 @@ export const Header = styled.header`
   align-items: center;
   margin: 4rem 5rem;
   color: #33358b;
+  min-width: 68.75rem;
 
   & div h2 {
     font-family: "Montserrat", sans-serif;

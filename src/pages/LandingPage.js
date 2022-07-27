@@ -5,6 +5,7 @@ import {
   AdditionalCoursesTitleWrapper,
   Splitter,
   AdditionalCoursesTitle,
+  CardsWrapper,
 } from "./landing-page.style";
 import Courses from "components/Courses";
 import { useDispatch } from "react-redux";
@@ -32,13 +33,15 @@ const LandingPage = () => {
     <>
       <Header courseName={mainCourseName} />
       <Courses courses={courses} />
-      <AdditionalCoursesTitleWrapper>
-        <Splitter />
-        <AdditionalCoursesTitle>Additional Courses</AdditionalCoursesTitle>
-        <Splitter left />
-      </AdditionalCoursesTitleWrapper>
-      <AdditionalCourses courses={additionalCourses} />
-      <CourseTypes types={courseTypes} />
+      <CardsWrapper>
+        <AdditionalCoursesTitleWrapper>
+          <Splitter />
+          <AdditionalCoursesTitle>Additional Courses</AdditionalCoursesTitle>
+          <Splitter left />
+        </AdditionalCoursesTitleWrapper>
+        <AdditionalCourses courses={additionalCourses} />
+        <CourseTypes types={courseTypes} />
+      </CardsWrapper>
     </>
   );
 };

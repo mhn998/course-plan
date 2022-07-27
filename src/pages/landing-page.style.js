@@ -28,6 +28,7 @@ export const Splitter = styled.div`
 export const AdditionalCoursesTitle = styled.h2`
   text-align: center;
   font-size: 1.9rem;
+  min-width: 3rem;
 `;
 
 export const AdditionalCoursesWrapper = styled.div`
