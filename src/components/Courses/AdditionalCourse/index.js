@@ -5,6 +5,7 @@ import {
   SmallCourseType,
   SmallCourseDuration,
   SmallCourseLogo,
+  SmallCourseName
 } from "components/Courses/AdditionalCourse/small-course.style";
 import SmallCard from "components/UI/Cards/SmallCard";
 
@@ -14,7 +15,7 @@ const SmallCourse = ({ course }) => {
     <SmallCard>
       <SmallCourseTitleWrapper>
         <SmallCourseLogo src={image} alt="small course logo" />
-        <h2>{name}</h2>
+        <SmallCourseName>{name}</SmallCourseName>
       </SmallCourseTitleWrapper>
       <SmallCourseTypeTitle>Course type</SmallCourseTypeTitle>
       <SmallCourseInfoWrapper>

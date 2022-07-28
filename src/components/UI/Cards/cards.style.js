@@ -13,4 +13,8 @@ export const StyledCard = styled.div`
   padding: ${({ isMain }) => (isMain ? "0" : "1.9rem")};
   margin: 1.2rem;
   font-family: "Roboto", sans-serif;
+
+  @media (max-width: 1500px) {
+    width: ${({ isMain }) => (isMain ? "27.375rem" : "20.6rem")};
+  }
 `;
