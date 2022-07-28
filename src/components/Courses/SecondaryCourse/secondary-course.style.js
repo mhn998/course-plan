@@ -40,7 +40,7 @@ export const SecondaryCourseHours = styled.h3`
 `;
 
 export const SecondaryCourseDays = styled.h3`
-  margin: 0;
+  margin-top: 0.5rem;
   font-size: 0.9rem;
   color: ${colors.grey};
 
@@ -58,4 +58,10 @@ export const SecondaryCourseFullName = styled.h2`
   margin-top: 0;
   font-size: 1.43rem;
   color: ${colors.darkBlue};
+
+  @media (max-width: 1500px) {
+    font-size: 1rem;
+    width: 15.375rem;
+
+  }
 `;

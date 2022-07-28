@@ -9,7 +9,7 @@ const Header = ({ courseName }) => {
       </div>
 
       <div>
-        <h2>{courseName} study Plan</h2>
+        <h2>{courseName} study plan</h2>
       </div>
     </MainHeader>
   );

@@ -4,39 +4,81 @@ import MainCourse from "components/Courses/MainCourse";
 import SecondaryCourse from "components/Courses/SecondaryCourse";
 import {
   CardsWrapper,
-  TwoSecondaryCoursesWrapper,
+  SecondaryCoursesWrapper,
 } from "pages/landing-page.style";
+import { Fragment } from "react";
 
 const Courses = ({ courses }) => {
+  const preRenderedCourses = [];
+
+  for (let i = 0; i < courses.length; i++) {
+    preRenderedCourses.push({
+      name: courses[i].name,
+      daysDuration: courses[i].daysDuration,
+      hoursDuration: courses[i].hoursDuration,
+      image: courses[i].image,
+    });
+    const allLevels = courses[i].subCourses.map(
+      (sub) =>
+        +sub.id.substring(sub.id.indexOf(" ") + 1, sub.id.indexOf(" ") + 2)
+    );
+    const numOfLevels = [...new Set(allLevels)].length;
+    for (let j = 1; j < numOfLevels + 1; j++) {
+      preRenderedCourses.splice(i, 1, {
+        ...preRenderedCourses[i],
+        subCourses: {
+          ...preRenderedCourses[i].subCourses,
+          ["level " + j]: courses[i].subCourses.filter(
+            (sub) =>
+              +sub.id.substring(
+                sub.id.indexOf(" ") + 1,
+                sub.id.indexOf(" ") + 2
+              ) === j
+          ),
+        },
+      });
+    }
+  }
+
   return (
     <CardsWrapper>
-      {courses.map((course, index) => (
-        <>
+      {preRenderedCourses.map((course, index) => (
+        <Fragment key={index}>
           <MainCourse course={course} key={course.name} />
-          <img src={ArrowDown} alt="Arrow down" key={index} />
-          <TwoSecondaryCoursesWrapper key={index}>
-            {course.subCourses.slice(0, 2).map((course, idx) => (
-              <>
-                <SecondaryCourse course={course} key={course.id} />
-                {idx === 0 ? (
+          <img src={ArrowDown} alt="Arrow down" key={course.image} />
+          <Fragment key={index}>
+            {Object.keys(course.subCourses).map((courseLevel, levelIdx) => (
+              <Fragment key={courseLevel + levelIdx }>
+                <SecondaryCoursesWrapper key={course.name + index}>
+                  {course.subCourses[courseLevel].map((sub, idx) => (
+                    <Fragment key={sub.id + idx}>
+                      <SecondaryCourse course={sub} key={sub.id} />
+                      {idx !== course.subCourses[courseLevel].length - 1 ? (
+                        <img
+                          src={ArrowRight}
+                          alt="Arrow right"
+                          key={courseLevel + sub.id + '00'}
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </Fragment>
+                  ))}
+                </SecondaryCoursesWrapper>
+                <br />
+                {levelIdx !== Object.keys(course.subCourses).length - 1 ? (
                   <img
-                    src={ArrowRight}
-                    alt="Arrow right"
-                    key={course.id + idx}
+                    src={ArrowDown}
+                    alt="Arrow down"
+                    key={courseLevel + course.id}
                   />
                 ) : (
                   ""
                 )}
-              </>
+              </Fragment>
             ))}
-          </TwoSecondaryCoursesWrapper>
-          {course.subCourses.slice(2, 4).map((course, idx) => (
-            <>
-              <img src={ArrowDown} alt="Arrow down" key={course.id + idx} />
-              <SecondaryCourse course={course} key={course.id} />
-            </>
-          ))}
-        </>
+          </Fragment>
+        </Fragment>
       ))}
     </CardsWrapper>
   );

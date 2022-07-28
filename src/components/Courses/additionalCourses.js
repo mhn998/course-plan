@@ -4,8 +4,8 @@ import { AdditionalCoursesWrapper } from "pages/landing-page.style";
 const AdditionalCourses = ({ courses }) => {
   return (
     <AdditionalCoursesWrapper>
-      {courses.map((course) => (
-        <SmallCourse course={course} />
+      {courses.map((course,idx) => (
+        <SmallCourse key={`${course.name} ${idx}`} course={course} />
       ))}
     </AdditionalCoursesWrapper>
   );
